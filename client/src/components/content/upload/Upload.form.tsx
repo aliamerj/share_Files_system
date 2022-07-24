@@ -15,9 +15,9 @@ import {
   ErrorMessageConainer,
   ErrorMessageStyle,
   TextStyle,
-} from "../../styles/content.style/form.style";
-import { uploadHandler } from "../../utils/handleRequest";
-import { ResponseUploading, UploadData } from "../../Types/types";
+} from "../../../styles/content.style/upload.style/form.style";
+import { uploadHandler } from "../../../utils/handleRequests";
+import { ResponseUploading, UploadData } from "../../../Types/types";
 
 const UploadForm = ({
   setFileDataHelper,
@@ -70,7 +70,7 @@ const UploadForm = ({
           </Alert>
         )}
       </ErrorMessageConainer>
-      <TextStyle>You Can Protect your file with a password</TextStyle>
+      <TextStyle>You Can Protect your File with a Password</TextStyle>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <TextField
           type="password"

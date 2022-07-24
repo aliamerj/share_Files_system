@@ -8,4 +8,5 @@ export interface UploadFile {
   message: string;
   success: boolean;
   fileLink: null | string;
+  protectedFile: boolean;
 }

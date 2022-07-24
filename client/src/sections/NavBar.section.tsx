@@ -1,7 +1,7 @@
 import { ContainerStyle } from "../styles/navBar.style/navBar.style";
 import Logo from "../components/navBar/Logo";
 
-const NavBar = () => {
+const NavBarSection = () => {
   return (
     <ContainerStyle>
       <Logo />
@@ -9,4 +9,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarSection;

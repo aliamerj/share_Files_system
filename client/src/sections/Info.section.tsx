@@ -2,9 +2,9 @@ import {
   ContainerStyle,
   InfoText,
   InfoTextSub,
-} from "../styles/content.style/info.style";
+} from "../styles/content.style/upload.style/info.style";
 
-const Info = () => {
+const InfoSection = () => {
   return (
     <ContainerStyle>
       <InfoText>
@@ -18,4 +18,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default InfoSection;

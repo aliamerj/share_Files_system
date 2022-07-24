@@ -3,7 +3,6 @@ import _ from "lodash";
 import { hash } from "bcrypt";
 import { File, UploadFile } from "../../Types/types";
 import FileModule from "../../modules/File.module";
-
 type UploadFileFunction = (
   req: Request,
   res: Response

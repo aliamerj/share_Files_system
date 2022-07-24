@@ -7,3 +7,6 @@ export interface ResponseUploading {
   message: string;
   success: boolean;
 }
+export interface DownloadForm {
+  password: string;
+}

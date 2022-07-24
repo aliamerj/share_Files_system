@@ -21,3 +21,6 @@ export const uploadHandler = async (
 
   setFileHelper(res.data);
 };
+export const getFileInfo = async (id: string) => {
+  // todo
+};
