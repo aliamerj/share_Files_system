@@ -2,7 +2,7 @@ import {
   ContainerStyle,
   InfoText,
   InfoTextSub,
-} from "../../styles/content.style/info.style";
+} from "../styles/content.style/info.style";
 
 const Info = () => {
   return (

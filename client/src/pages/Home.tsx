@@ -1,13 +1,13 @@
-import Info from "../components/content/Info";
-import UploadForm from "../components/content/Upload.form";
-import NavBar from "../components/navBar/NavBar";
+import Info from "../sections/Info";
+import NavBar from "../sections/NavBar";
+import Content from "../sections/Content";
 
 const Home = () => {
   return (
     <>
       <NavBar />
       <Info />
-      <UploadForm />
+      <Content />
     </>
   );
 };

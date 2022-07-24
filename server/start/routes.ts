@@ -5,7 +5,8 @@ import uploadRoute from "../routes/upload/upload.route";
 
 export default function (app: Application) {
   app.use(express.json());
-  app.post("/upload", uploadRoute);
+
+  app.use("/upload", uploadRoute);
   app.use((_req, _res, next: NextFunction) => {
     next(createError(404));
   });

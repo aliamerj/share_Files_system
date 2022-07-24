@@ -1,5 +1,5 @@
-import { ContainerStyle } from "../../styles/navBar.style/navBar.style";
-import Logo from "./Logo";
+import { ContainerStyle } from "../styles/navBar.style/navBar.style";
+import Logo from "../components/navBar/Logo";
 
 const NavBar = () => {
   return (
