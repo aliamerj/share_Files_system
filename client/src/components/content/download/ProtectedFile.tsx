@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
 import {
   CenterDownloadStyle,
   LeftDownloadStyle,
@@ -12,9 +12,16 @@ import {
 import DownloadIcon from "@mui/icons-material/Download";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { DownloadForm } from "../../../Types/types";
+import { DownloadForm, GetfileInfo } from "../../../Types/types";
+import { downloadProtectedFile } from "../../../utils/handleRequests";
 
-const ProductedFile = () => {
+const ProductedFile = ({
+  fileInfo,
+  id,
+}: {
+  fileInfo: GetfileInfo;
+  id: string;
+}) => {
   const {
     register,
     handleSubmit,
@@ -22,7 +29,8 @@ const ProductedFile = () => {
     formState: { errors },
   } = useForm<DownloadForm>();
   const [startTyping, setStartTyping] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [startDownload, setStartDownload] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
   const handleChangeInput = (
@@ -35,10 +43,28 @@ const ProductedFile = () => {
   };
 
   const onSubmit: SubmitHandler<DownloadForm> = (data) => {
-    console.log(data);
+    if (!errors.password && data.password) {
+      downloadProtectedFile(id, data)
+        .then((res) => {
+          setStartDownload(true);
+          if (res.data?.message) {
+            setError(true);
+            setMessage(res.data.message);
+            return;
+          }
+          setError(false);
+          setMessage("download success");
+        })
+        .catch((err: any) => {
+          console.log(err);
+          setStartDownload(true);
+          setError(true);
+          setMessage(err.response.data.message);
+        });
+    }
     if (errors.password?.message) {
       setError(true);
-      setErrorMessage(errors.password.message);
+      setMessage(errors.password.message);
     } else {
       reset();
       setStartTyping(false);
@@ -51,8 +77,15 @@ const ProductedFile = () => {
         style={{ display: "flex", width: "100%" }}
       >
         <LeftDownloadStyle>
+          {startDownload ? (
+            error ? (
+              <Alert severity="error">{message}</Alert>
+            ) : (
+              <Alert severity="success">{message}</Alert>
+            )
+          ) : null}
           <TitleStyle>Download File</TitleStyle>
-          <FileNameStyle>photo.jpg</FileNameStyle>
+          <FileNameStyle>{fileInfo.name}</FileNameStyle>
 
           <Button
             variant="contained"
@@ -63,6 +96,9 @@ const ProductedFile = () => {
           >
             Download
           </Button>
+          <FileNameStyle>
+            The file has been downloaded: {fileInfo.downloadCount}
+          </FileNameStyle>
         </LeftDownloadStyle>
         <CenterDownloadStyle>
           <LineDownloadStyle />
@@ -77,7 +113,7 @@ const ProductedFile = () => {
             type="password"
             variant="outlined"
             required
-            helperText={errorMessage}
+            helperText={error ? message : ""}
             {...register("password", { required: "You should input password" })}
             onChange={(data) => handleChangeInput(data)}
           />

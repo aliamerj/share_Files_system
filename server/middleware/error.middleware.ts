@@ -10,12 +10,16 @@ const errorMiddleware = (
     res
       .status(400)
       .json("The email address is already associated with another Account");
+  } else if (err.name === "CastError") {
+    res.status(404).redirect("http://localhost:3000/file/" + err.value);
   } else if (err.status === 404) {
-    res.status(404).json(`not found page :(`);
+    res.status(404).redirect("http://localhost:3000/file/files");
   } else
     res
       .status(500)
-      .json(`Sorry, something went wrong. please try agan later. `);
+      .json(
+        err.message ?? `Sorry, something went wrong. please try agan later. `
+      );
 };
 
 export default errorMiddleware;

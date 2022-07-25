@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { downloadFile } from "./download.controller";
+import { checkAuth } from "../../middleware/auth.middleware";
+import {
+  downloadProtectedFile,
+  downloadUnprotectedFile,
+  verfiyDownloadProtected,
+  getFileInfo,
+} from "./download.controller";
 
 const route = Router();
 
-route.get("/file/:id", downloadFile);
-route.post("/file/:id", downloadFile);
+route.get("/:id", getFileInfo);
+route.get("/file/:id", downloadUnprotectedFile);
+route.post("/file/:id", verfiyDownloadProtected);
+route.get("/file/:key/:name/:path", [checkAuth, downloadProtectedFile]);
 
 export default route;
