@@ -8,12 +8,15 @@ export const ContainerStyle = styled("div")(() => ({
   alignItems: "center",
 }));
 
-export const TitleStyle = styled("h2")(() => ({
+export const TitleStyle = styled("h2")(({ theme }) => ({
   marginTop: "20%",
   display: "flex",
   padding: "10px",
+  [theme.breakpoints.down("md")]: {
+    marginTop: "20px",
+  },
 }));
-export const TextareaStyle = styled("textarea")(() => ({
+export const TextareaStyle = styled("textarea")(({ theme }) => ({
   border: "2px solid #a1922e",
   outline: "none",
   width: "90%",
@@ -22,4 +25,7 @@ export const TextareaStyle = styled("textarea")(() => ({
   resize: "none",
   padding: "0.5rem 1rem",
   borderRadius: "0.5rem",
+  [theme.breakpoints.down("md")]: {
+    marginBottom: "8px",
+  },
 }));

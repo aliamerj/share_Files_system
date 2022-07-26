@@ -1,9 +1,13 @@
 import { Alert, Button, TextField } from "@mui/material";
 import {
   CenterDownloadStyle,
+  DownloadFormStyle,
   LeftDownloadStyle,
   LineDownloadStyle,
   RightDownloadStyle,
+  SubTitleProtectedFile,
+  TextFieldStyle,
+  TitleProtectedFile,
 } from "../../../styles/content.style/download.style/download.style";
 import {
   FileNameStyle,
@@ -66,10 +70,7 @@ const ProductedFile = ({
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        style={{ display: "flex", width: "100%" }}
-      >
+      <DownloadFormStyle onSubmit={handleSubmit(onSubmit)}>
         <LeftDownloadStyle>
           {startDownload ? (
             error ? (
@@ -98,9 +99,13 @@ const ProductedFile = ({
           <LineDownloadStyle />
         </CenterDownloadStyle>
         <RightDownloadStyle>
-          <h2>This File is Protected with Password</h2>
-          <h3>You can Download it only if you have courret password</h3>
-          <TextField
+          <TitleProtectedFile>
+            This File is Protected with Password
+          </TitleProtectedFile>
+          <SubTitleProtectedFile>
+            You can Download it only if you have courret password
+          </SubTitleProtectedFile>
+          <TextFieldStyle
             error={error}
             id="outlined-error"
             label="Password"
@@ -112,7 +117,7 @@ const ProductedFile = ({
             onChange={(data) => handleChangeInput(data)}
           />
         </RightDownloadStyle>
-      </form>
+      </DownloadFormStyle>
     </>
   );
 };

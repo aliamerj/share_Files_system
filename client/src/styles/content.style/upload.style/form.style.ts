@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 export const ContainerFormStyle = styled("div")(() => ({
   height: "63vh",
 }));
-export const WrapperStyle = styled("div")(() => ({
+export const WrapperStyle = styled("div")(({ theme }) => ({
   background: "#fff",
   padding: "3%",
   width: "60%",
@@ -14,13 +14,22 @@ export const WrapperStyle = styled("div")(() => ({
   boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
   WebkitBoxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
   MozBoxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
 }));
 
-export const LeftStyle = styled("div")(() => ({
+export const LeftStyle = styled("div")(({ theme }) => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    borderBottom: "1.5px solid lightgray",
+  },
 }));
 export const RightStyle = styled("div")(() => ({
   flex: 1,
@@ -34,11 +43,14 @@ export const CenterStyle = styled("div")(() => ({
   justifyContent: "center",
   position: "relative",
 }));
-export const LineStyle = styled("div")(() => ({
+export const LineStyle = styled("div")(({ theme }) => ({
   width: "1.5px",
-  height: "40vh",
+  height: "305px",
   marginRight: "50px",
   backgroundColor: "lightgray",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
 }));
 
 export const TextStyle = styled("h2")(() => ({
@@ -59,9 +71,12 @@ export const ErrorMessageStyle = styled("p")(() => ({
   padding: "auto",
   margin: "auto",
 }));
-export const ErrorMessageConainer = styled("div")(() => ({
+export const ErrorMessageConainer = styled("div")(({ theme }) => ({
   marginTop: "auto",
   fontFamily: "cursive",
   padding: "auto",
   width: "100%",
+  [theme.breakpoints.down("md")]: {
+    marginTop: "5px",
+  },
 }));
