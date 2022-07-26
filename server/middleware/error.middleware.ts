@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction } from "express";
+const notFoundErrorsnames = ["CastError", "NotFoundPage", "FileDeletedOnOpen"];
+const authErrorName = ["Invalidtoken"];
 
 const errorMiddleware = (
   err: any,
@@ -6,17 +8,14 @@ const errorMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  if (err.code === 11000) {
-    res
-      .status(400)
-      .json("The email address is already associated with another Account");
-  } else if (err.name === "CastError") {
-    res.status(404).redirect("http://localhost:3000/file/" + err.value);
-  } else if (err.status === 404) {
-    res.status(404).redirect("http://localhost:3000/file/files");
+  if (notFoundErrorsnames.includes(err.name)) {
+    process.env.ClIENT_URL &&
+      res.status(404).redirect(process.env.ClIENT_URL + "/NOT_Found");
+  } else if (authErrorName.includes(err.name)) {
+    res.status(403).redirect(`${process.env.ClIENT_URL}/file/${err.fileId}`);
   } else
     res
-      .status(500)
+      .status(err.status ?? 500)
       .json(
         err.message ?? `Sorry, something went wrong. please try agan later. `
       );

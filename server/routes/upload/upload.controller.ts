@@ -1,21 +1,24 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import _ from "lodash";
 import { hash } from "bcrypt";
 import { File, UploadFile } from "../../Types/types";
 import FileModule from "../../modules/File.module";
-type UploadFileFunction = (
-  req: Request,
-  res: Response
-) => Promise<Response<UploadFile>>;
+import createHttpError from "http-errors";
 
-export const uploadFile: UploadFileFunction = async (req, res) => {
+export const uploadFile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { path, originalname } = _.pick(req.file, ["path", "originalname"]);
   if (!path || !originalname) {
-    return res.status(400).json({
-      message: `can not upload this file `,
-      success: false,
-      fileLink: null,
-    });
+    return next(
+      createHttpError(400, {
+        message: `can not upload this file `,
+        success: false,
+        fileLink: null,
+      })
+    );
   }
   const fileData: File = {
     path,

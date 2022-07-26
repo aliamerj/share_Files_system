@@ -10,7 +10,13 @@ export default function (app: Application) {
   app.use("/upload", uploadRoute);
   app.use("/download", downloadRoute);
   app.use((_req, _res, next: NextFunction) => {
-    next(createError(404));
+    next(
+      createError(404, {
+        name: "NotFoundPage",
+        message: "Not Found Page",
+        success: false,
+      })
+    );
   });
   app.use(errorMiddleware);
 }

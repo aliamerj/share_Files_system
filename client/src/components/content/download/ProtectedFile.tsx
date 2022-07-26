@@ -45,21 +45,15 @@ const ProductedFile = ({
   const onSubmit: SubmitHandler<DownloadForm> = (data) => {
     if (!errors.password && data.password) {
       downloadProtectedFile(id, data)
-        .then((res) => {
-          setStartDownload(true);
-          if (res.data?.message) {
-            setError(true);
-            setMessage(res.data.message);
-            return;
-          }
+        .then(() => {
           setError(false);
+          setStartDownload(true);
           setMessage("download success");
         })
         .catch((err: any) => {
-          console.log(err);
           setStartDownload(true);
           setError(true);
-          setMessage(err.response.data.message);
+          setMessage(err.response.data);
         });
     }
     if (errors.password?.message) {

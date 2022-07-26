@@ -23,7 +23,8 @@ export interface DownloadFile {
 }
 
 export interface VerfiyDownload extends DownloadFile {
-  secretKey?: string;
-  path?: string;
-  name?: string;
+  secretKey: string;
+  path: string;
+  name: string;
+  fileId: string;
 }

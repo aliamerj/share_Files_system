@@ -35,7 +35,6 @@ const UploadForm = ({
     }
     if (fileData && !fileData.success) {
       setStatusFile("error");
-      console.log(statusFile);
     }
   }, [fileData]);
 
@@ -48,8 +47,10 @@ const UploadForm = ({
   const onSubmit: SubmitHandler<UploadData> = (data) => {
     setFileName(null);
     setStatusFile(undefined);
-    uploadHandler(data, setFileDataHelper);
-    reset();
+    uploadHandler(data)
+      .then((res) => setFileDataHelper(res.data))
+      .then(() => reset())
+      .catch(() => reset());
   };
 
   return (

@@ -12,6 +12,6 @@ const route = Router();
 route.get("/:id", getFileInfo);
 route.get("/file/:id", downloadUnprotectedFile);
 route.post("/file/:id", verfiyDownloadProtected);
-route.get("/file/:key/:name/:path", [checkAuth, downloadProtectedFile]);
+route.get("/file/:key/:name/:path/:fileId", [checkAuth, downloadProtectedFile]);
 
 export default route;

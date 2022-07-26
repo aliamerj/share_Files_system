@@ -2,16 +2,11 @@ import {
   ResponseUploading,
   UploadData,
   GetfileInfo,
-  DownloadFile,
   VerfiyDownload,
 } from "../Types/types";
 import { userRequest } from "./requestMethods";
-type SetFileUploadHelper = (data: ResponseUploading) => void;
 
-export const uploadHandler = async (
-  data: UploadData,
-  setFileHelper: SetFileUploadHelper
-) => {
+export const uploadHandler = async (data: UploadData) => {
   let formData = new FormData();
   formData.append("file", data.files[0]);
   formData.append("password", data.password);
@@ -25,7 +20,7 @@ export const uploadHandler = async (
     }
   );
 
-  setFileHelper(res.data);
+  return res;
 };
 
 // download file info
@@ -51,12 +46,13 @@ export const downloadProtectedFile = async (
     password,
   });
   if (res.status === 200 && res.data?.name) {
-    const { name, path, secretKey } = res.data;
+    const { name, path, secretKey, fileId } = res.data;
+    console.log("fil da", res.data);
     console.log(
-      `http://localhost:5000/download/file/${secretKey}/${name}/${path}`
+      `http://localhost:5000/download/file/${secretKey}/${name}/${path}/${fileId}`
     );
     window.open(
-      `http://localhost:5000/download/file/${secretKey}/${name}/${path}`
+      `http://localhost:5000/download/file/${secretKey}/${name}/${path}/${fileId}`
     );
   }
   return res;

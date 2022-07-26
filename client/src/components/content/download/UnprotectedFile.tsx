@@ -21,20 +21,15 @@ const UnproductedFile = ({
   const [startDownload, setStartDownload] = useState<boolean>(false);
   const handleDownload = () => {
     downloadUnProtectedFile(id)
-      .then((data) => {
+      .then(() => {
         setStartDownload(true);
-        if (data.data?.message) {
-          setError(true);
-          setMessage(data.data.message);
-          return;
-        }
         setError(false);
         setMessage("download success");
       })
       .catch((err: any) => {
         setStartDownload(true);
         setError(true);
-        setMessage(err.response.data.message);
+        setMessage(err.response.data);
       });
   };
   return (
