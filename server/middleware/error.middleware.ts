@@ -4,9 +4,9 @@ const authErrorName = ["Invalidtoken"];
 
 const errorMiddleware = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   if (notFoundErrorsnames.includes(err.name)) {
     process.env.ClIENT_URL &&
