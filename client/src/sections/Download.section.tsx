@@ -15,17 +15,13 @@ const DownloadSection = () => {
   const [fileInfo, setFileInfo] = useState<GetfileInfo | null>(null);
   const { fileId } = useParams();
   const [isloading, setIsLoading] = useState<boolean>(true);
-  const setFileInfoHandler = (fileInfo: GetfileInfo) => {
-    setFileInfo(fileInfo);
-  };
-
   useEffect(() => {
     fileId &&
       getFileInfo(fileId)
         .then((data) => setFileInfo(data.data))
         .catch((e) => setFileInfo(e.response.data))
         .then(() => setIsLoading(false));
-  }, []);
+  }, [fileId]);
   return (
     <ContainerDownloadStyle>
       <WrapperDownloadStyle>

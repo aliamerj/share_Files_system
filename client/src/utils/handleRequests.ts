@@ -47,12 +47,9 @@ export const downloadProtectedFile = async (
   });
   if (res.status === 200 && res.data?.name) {
     const { name, path, secretKey, fileId } = res.data;
-    console.log("fil da", res.data);
-    console.log(
-      `http://localhost:5000/download/file/${secretKey}/${name}/${path}/${fileId}`
-    );
     window.open(
-      `http://localhost:5000/download/file/${secretKey}/${name}/${path}/${fileId}`
+      `http://localhost:5000/download/file/${secretKey}/${name}/${path}/${fileId}`,
+      "_blank"
     );
   }
   return res;

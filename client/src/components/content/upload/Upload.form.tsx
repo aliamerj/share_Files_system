@@ -131,8 +131,3 @@ const UploadForm = ({
 };
 
 export default UploadForm;
-
-// the fist way to get error message
-{
-  /* <ErrorMessage errors={errors} name="file" /> */
-}

@@ -56,16 +56,16 @@ export const verfiyDownloadProtected = async (
   file.downloadCount++;
   file.save();
   if (process.env.jwt_secret) {
-    const pathFile = file.path.split("\\")[1];
+    const pathFile = file.path.split("/")[1];
     const key = jwt.sign(
       { name: file.originalname, path: pathFile },
       process.env.jwt_secret,
-      { expiresIn: 30 }
+      { expiresIn: 300000 }
     );
 
     return res.status(200).json({
       secretKey: key,
-      path: file.path.split("\\")[1],
+      path: pathFile,
       name: file.originalname,
       fileId: file._id,
     });
@@ -77,6 +77,7 @@ export const downloadProtectedFile = (
   next: NextFunction
 ) => {
   const { path, name } = req.params;
+  console.log("Downloading protected file: ", req.params);
   res.download(join("uploads", path), name, (err: any) => {
     if (err) {
       if (err.statusCode === 404) {

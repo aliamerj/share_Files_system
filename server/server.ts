@@ -8,6 +8,7 @@ import db from "./start/db";
 import routes from "./start/routes";
 
 dotenv.config();
+
 config();
 db();
 
